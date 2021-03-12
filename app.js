@@ -3,14 +3,12 @@ const app = express();
 const port = 3030;
 const path = require ('path');
 
-// le decimos cual es la carpeta publica
-const publicPath = path.join(__dirname, './public');
-// para que encuentre las imagenes y css
-app.use(express.static('public'));
 
+const publicPath = path.resolve(__dirname, './public');
+app.use(express.static(publicPath));
 
-app.get('/home', (req, res) =>
-res.sendFile(path.join(__dirname, './views/home.html'))
-);
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './views/home.html'));
+});
 
 app.listen(port, () => console.log("Esta saliendo por el puerto" + port))
